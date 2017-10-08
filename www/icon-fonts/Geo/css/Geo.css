@@ -1,0 +1,16 @@
+/*!
+ *  Elusive Icons 2.0.0 by @ReduxFramework - http://elusiveicons.com - @reduxframework
+ *  License - http://elusiveicons.com/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+/* FONT PATH
+ * -------------------------- */
+ 
+ @font-face {
+    font-family: "Geo";
+    src: url('../fonts/Geo.eot') format('embedded-opentype'), url('../fonts/Geo.woff') format('woff'), url('../fonts/Geo.ttf') format('truetype');
+	font-weight: normal;
+  	font-style: normal;
+}
+.geoFont {font-family: "Geo"}
+
+

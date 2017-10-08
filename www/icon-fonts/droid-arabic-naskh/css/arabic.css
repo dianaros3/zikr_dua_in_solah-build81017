@@ -1,0 +1,16 @@
+/*!
+ *  Elusive Icons 2.0.0 by @ReduxFramework - http://elusiveicons.com - @reduxframework
+ *  License - http://elusiveicons.com/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+/* FONT PATH
+ * -------------------------- */
+ 
+ @font-face {
+    font-family: "DroidNaskh-Regular";
+    src: url('../fonts/DroidArabicNaskh.eot') format('embedded-opentype'), url('../fonts/DroidArabicNaskh.woff') format('woff'), url('../fonts/DroidArabicNaskh.ttf') format('truetype');
+	font-weight: normal;
+  	font-style: normal;
+}
+.droidFont {font-family: "DroidNaskh-Regular"}
+
+

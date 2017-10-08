@@ -1,0 +1,16 @@
+/*!
+ *  Elusive Icons 2.0.0 by @ReduxFramework - http://elusiveicons.com - @reduxframework
+ *  License - http://elusiveicons.com/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+/* FONT PATH
+ * -------------------------- */
+ 
+ @font-face {
+    font-family: "Mcs Swer Al_Quran 3";
+    src: url('../fonts/Mcs_Swer_Al_Quran.eot') format('embedded-opentype'), url('../fonts/Mcs_Swer_Al_Quran.woff') format('woff'), url('../fonts/Mcs_Swer_Al_Quran.ttf') format('truetype');
+	font-weight: normal;
+  	font-style: normal;
+}
+.withNewFont {font-family: "Mcs Swer Al_Quran 3"}
+
+

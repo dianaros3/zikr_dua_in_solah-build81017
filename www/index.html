@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html>
+    <!--
+  * Please see the included README.md file for license terms and conditions.
+  -->
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="galleria/galleria.classic.css">
+
+        <link rel="stylesheet" type="text/css" href="cerulean/css/cerulean.min.css" class="uib-framework-theme">
+        <meta charset="UTF-8">
+        <title>Blank App Designer Cordova Web App Project Template</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <link rel="stylesheet" type="text/css" href="icon-fonts/Geo/css/Geo.css">
+        <link rel="stylesheet" type="text/css" href="icon-fonts/ArabicKufiSSK/css/arabic.css">
+        <link rel="stylesheet" type="text/css" href="icon-fonts/amiri/css/arabic.css">
+        <link rel="stylesheet" type="text/css" href="icon-fonts/droid-arabic-naskh/css/arabic.css">
+        <!--
+  * The "meta viewport" tag (below) helps your app size appropriately to a device's ideal viewport.
+  * Note that Windows device viewports work better when initialized using the @viewport CSS rule.
+  * For a quick overview of "meta viewport" and @viewport, see this article:
+  *   http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag
+  * To see how it works, try your app on a real device with and without a "meta viewport" tag.
+  * Additional useful references include:
+  *   http://www.quirksmode.org/mobile/viewports.html
+  *   http://www.quirksmode.org/mobile/metaviewport/devices.html
+  *   https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
+-->
+
+        <!-- <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1"> -->
+        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2"> -->
+
+        <style>
+            /* following three (cascaded) are equivalent to above three meta viewport statements */
+            /* see http://www.quirksmode.org/blog/archives/2014/05/html5_dev_conf.html */
+            /* see http://dev.w3.org/csswg/css-device-adapt/ */
+                @-ms-viewport { width: 100vw ; min-zoom: 100% ; zoom: 100% ; }          @viewport { width: 100vw ; min-zoom: 100% zoom: 100% ; }
+                @-ms-viewport { user-zoom: fixed ; min-zoom: 100% ; }                   @viewport { user-zoom: fixed ; min-zoom: 100% ; }
+                /*@-ms-viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }   @viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }*/
+        </style>
+
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
+
+        <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+        <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work below -->
+        <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+
+        <!-- Recommended location for your JavaScript libraries -->
+        <!-- These library references (below) are just examples to give you the general idea... -->
+        <!-- <script src="lib/mc/hammer.js"></script> -->
+        <!-- <script src="lib/ft/fastclick.js"></script> -->
+
+        <!--
+  * cordova.js is a phantom lib for "Cordova HTML5 web app," it does nothing in a "Standard HTML5 web app"
+  * Seeing a "Failed to load resource: net::ERR_FILE_NOT_FOUND" message caused by this "cordova.js" script?
+  * The cordova.js script is required if you convert your "Standard HTML5" project into a "Cordova" project.
+  * You can safely ignore the error or comment out this line if you will not be developing a Cordova app.
+-->
+        <script src="cordova.js" id="xdkJScordova_"></script>
+
+        <script src="js/app.js"></script>
+        <!-- for your event code, see README and file comments for details -->
+        <script src="js/init-app.js"></script>
+        <!-- for your init code, see README and file comments for details -->
+        <script src="xdk/init-dev.js"></script>
+        <!-- normalizes device and document ready events, see file for details -->
+        <script type="application/javascript" src="lib/jquery.min.js"></script>
+        <script type="application/javascript" src="galleria/galleria-1.3.6.min.js"></script>
+        <script type="application/javascript" src="galleria/galleria.classic.min.js"></script>
+        <script type="application/javascript" src="galleria/galleria-startup.js"></script>
+        <script type="application/javascript" src="marginal/marginal-position.min.js"></script>
+        <script type="application/javascript" src="js/index_user_scripts.js"></script>
+        <script type="application/javascript" src="xdk/ad/bs_subpage.js"></script>
+        <script type="application/javascript" src="camera/cordova-cam.js"></script>
+        <!-- must-have, created by cordova when prepare/build -->
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <!-- AdMob plugin demo code -->
+        <script type="text/javascript" src="js/jquery-1.9.js"></script>
+        <script type="text/javascript" src="js/admob.js"></script>
+
+        <!-- Intel XDK files -->
+        <script src="xdk/init-dev.js"></script>
+        <!-- normalizes device and document ready events, see README for details -->
+        <script src="js/app.js"></script>
+        <!-- recommended location of your JavaScript code relative to other JS files -->
+        <script type="application/javascript" src="admob/admob.js"></script>
+        <script type="application/javascript" src="sidebar/js/hammer.js"></script>
+        <script type="application/javascript" src="sidebar/js/jquery.hammer.js"></script>
+        <script type="application/javascript" src="sidebar/js/swipe-hammer.js"></script>
+        <script type="application/javascript" src="sidebar/js/sidebar.js"></script>
+        <script type="application/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <!--<script>
+		//Event listener for camera
+document.addEventListener("intel.xdk.camera.picture.add",onSuccess);
+document.addEventListener("intel.xdk.camera.picture.busy",onSuccess);
+document.addEventListener("intel.xdk.camera.picture.cancel",onSuccess); </code>
+function onSuccess(event)
+{
+if (event.success === true)
+{
+var imagesrc = intel.xdk.camera.getPictureURL(event.filename);
+var pic = document.getElementById("img");
+pic.src = imagesrc;
+}
+else
+{
+if (event.message !== undefined)
+{
+alert(event.message);
+}
+else
+{
+alert("error capturing picture");
+}
+}
+}
+//Camera button functionality
+function takepicture()
+{
+intel.xdk.camera.takePicture(80, true, "jpg");
+}
+		</script>-->
+        <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+        <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work above -->
+        <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+        <div class="upage" id="mainpage">
+
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_8 header-style" data-uib="layout/header" data-ver="0">
+                    <h2>CONTENT</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_79_48">
+
+                    <div class="grid grid-pad urow uib_row_1 row-height-1" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_1 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col">
+                                <button class="btn widget uib_w_9 d-margins content-margin button-color button-size white btn-success" data-uib="twitter%20bootstrap/button" data-ver="1">Iftitah / Istiftah</button>
+                                <button class="btn widget uib_w_15 d-margins content-margin button-color button-size white btn-success" data-uib="twitter%20bootstrap/button" data-ver="1">Isti'adzah / Ta'awwudz</button>
+                                <button class="btn widget uib_w_16 d-margins content-margin button-color button-size white btn-success" data-uib="twitter%20bootstrap/button" data-ver="1">Ruku’</button>
+                                <button class="btn widget uib_w_17 d-margins content-margin button-color button-size white btn-success" data-uib="twitter%20bootstrap/button" data-ver="1">I'tidal</button>
+                                <button class="btn widget uib_w_18 d-margins content-margin button-color button-size white btn-success" data-uib="twitter%20bootstrap/button" data-ver="1">Prostration (Sujood)</button>
+                                <button class="btn widget uib_w_19 d-margins content-margin button-color button-size white btn-success" data-uib="twitter%20bootstrap/button" data-ver="1">Sitting Between Two Prostrations</button>
+                                <button class="btn widget uib_w_20 d-margins content-margin button-color button-size white btn-success" data-uib="twitter%20bootstrap/button" data-ver="1">Tasyahud</button>
+                                <button class="btn widget uib_w_21 d-margins content-margin button-color button-size white btn-success" data-uib="twitter%20bootstrap/button" data-ver="1">Selawat After Tasyahud</button>
+                                <button class="btn widget uib_w_22 d-margins content-margin header-style button-color button-size white btn-success" data-uib="twitter%20bootstrap/button" data-ver="1">Dua Before Salaam</button>
+
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="upage hidden mainBG1" id="Iftitah">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_10" data-uib="layout/header" data-ver="0">
+                    <h2>IFTITAH / ISTIFTAH</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button class="btn widget uib_w_11 d-margins white btn-link" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-chevron-left" data-position="icon only"></i>
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right">
+                        <button class="btn widget uib_w_12 d-margins btn-link white" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-list" data-position="icon only"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_38_2">
+
+                    <div class="grid grid-pad urow uib_row_3 row-height-3" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_2 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col"><span class="widget uib_w_23 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 1</span>
+                                <div class="tarea widget uib_w_24 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_24">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُ أَكْبَرُ كَبِيرًا وَالْحَمْدُ لِلَّهِ كَثِيرًا وَسُبْحَانَ اللَّهِ بُكْرَةً وَأَصِيلاً</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_25 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_25">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Allah is the Most Great indeed, and much praise is to Allah, and glory is to Allah morning and evening</em><em>.</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="widget uib_w_207 scale-image d-margins" data-uib="media/img" data-ver="0">
+                                    <figure class="figure-align">
+                                        <img src="images/line.png">
+                                        <figcaption data-position="bottom"></figcaption>
+                                    </figure>
+                                </div>
+
+                                <div class="tarea widget uib_w_206 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_206">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>(اللَّهُ أَكْبَرُ كَبِيرًا (٣ كالي</p>
+
+                                            <p>(الْحَمْدُ لِلَّهِ كَثِيرًا(٣ كالي</p>
+
+                                            <p>(سُبْحَانَ اللَّهِ بُكْرَةً وَأَصِيلًا(٣ كالي</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_27 d-margins" data-uib="media/text" data-ver="0" name="uib_w_27">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Allah is the Most Great indeed (3x), much praise is to Allah (3x), glory is to Allah morning and evening (3x) </em><em>.</em>
+                                        </p>
+                                    </div>
+                                </div><span class="widget uib_w_28 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 2</span>
+                                <div class="tarea widget uib_w_29 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_29">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُ أَكْبَرُ&nbsp;ذُو الْمَلَكُوتِ وَالْجَبَرُوتِ وَالْكِبْرِيَاءِ وَالْعَظَمَةِ&nbsp;</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_30 d-margins" data-uib="media/text" data-ver="0" name="uib_w_30">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Allah is the Greatest, the One Who has all sovereignty, power, magnificence, and majesty</em><em>.</em>
+                                        </p>
+                                    </div>
+                                </div><span class="widget uib_w_31 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 3</span>
+                                <div class="tarea widget uib_w_32 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_32">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، تَبَارَكَ&nbsp;اسْمُكَ، وَتَعَالَى جَدُّكَ،&nbsp;وَلاَ إِلَهَ غَيْرُكَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_33 d-margins" data-uib="media/text" data-ver="0" name="uib_w_33">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Glory and praise be to You, O Allah. Blessed be Your name and exalted be Your majesty, there is none worthy of worship except You</em><em>.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+
+                                        <div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">Bacaan ini merupakan bacaan yang lebih utama di sisi mazhab Hanafi dan mazhab Hanbali.</div>
+
+                                        <div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">Kaifiyat lain bagi bacaan ini adalah seperti berikut:</div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_34 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_34">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>(I)</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_35 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_35">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، وَتَبَارَكَ اسْمُكَ، وَتَعَالَى جَدُّكَ، وَلَا إِلَهَ غَيْرُكَ، اللَّهُ أَكْبَرُ كَبِيرًا</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_36 d-margins" data-uib="media/text" data-ver="0" name="uib_w_36">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Glory and praise is to You, O Allah, blessed is Your Name and exalted is Your majesty, none has the right to be worshipped but You, Allah is altogether great</em>&nbsp;<em>.</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="widget uib_w_251 scale-image d-margins" data-uib="media/img" data-ver="0">
+                                    <figure class="figure-align">
+                                        <img src="images/line.png">
+                                        <figcaption data-position="bottom"></figcaption>
+                                    </figure>
+                                </div>
+                                <div class="tarea widget uib_w_37 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_37">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>(II)</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_38 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_38">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ وَتَبَارَكَ اسْمُكَ</p>
+
+                                            <p>وَتَعَالَى جَدُّكَ، وَلَا إِلَهَ غَيْرَكَ</p>
+
+                                            <p>(لَا إِلَهَ إِلَّا اللَّهُ(٣ كالي</p>
+
+                                            <p>(اللَّهُ أَكْبَرُ كَبِيرًا(٣ كالي</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_39 d-margins" data-uib="media/text" data-ver="0" name="uib_w_39">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Glory and praise is to You, O Allah, blessed is Your Name and exalted is Your majesty, none has the right to be worshipped but You, </em><em>there is no god except Allah (3x)</em><em>, Allah is altogether great</em><em>&nbsp;(3x) </em><em>.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_40 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 4</span>
+                                <div class="tarea widget uib_w_41 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_41">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهِ أَكْبَرُ وَجَّهْتُ وَجْهِيَ لِلَّذِي فَطَرَ السَّمَوَاتِ وَالْأَرْضَ حَنِيفًا مُسْلِمًا وَمَا أَنَا مِنَ الْمُشْرِكِينَ، إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ لَا
+                                                شَرِيكَ لَهُ وَبِذَلِكَ أُمِرْتُ وَأَنَا أَوَّلُ الْمُسْلِمِينَ، اللَّهُمَّ أَنْتَ الْمَلِكُ لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ وَبِحَمْدِكَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_42 d-margins" data-uib="media/text" data-ver="0" name="uib_w_42">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Allah is Most Great. Verily, I have turned my face toward Him who created the Heavens and the Earth, as a hanifa (worhsipping none but Allah Alone), as a Muslim, and I am not of the idolaters. Verily, my Salah, my sacrifice, my living, and my dying are for Allah, the Lord of the all that exists. He has no partner. And of this I have been commanded, and I am the first of the Muslims. O Allah, You are the Sovereign and there is none worthy of worship but You, glory and praise be to You</em><em>.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_43 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 5</span>
+                                <div class="tarea widget uib_w_44 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_44">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>وَجَّهْتُ وَجْهِىَ لِلَّذِى فَطَرَ السَّمَوَاتِ وَالأَرْضَ حَنِيفًا&nbsp;وَمَا أَنَا مِنَ المُشْرِكِينَ،&nbsp;إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ العَالَمِينَ، لَا شَرِيكَ لَهُ، وَبِذَلِكَ
+                                                أُمِرْتُ وَأَنَا مِنَ المُسْلِمِينَ،&nbsp;اللَّهُمَّ أَنْتَ المَلِكُ لَا إِلَهَ إِلَّا أَنْتَ، أَنْتَ رَبِّي&nbsp;وَأَنَا عَبْدُكَ، ظَلَمْتُ نَفْسِي وَاعْتَرَفْتُ بِذَنْبِي، فَاغْفِرْ لِي&nbsp;ذُنُوبِى&nbsp;جَمِيعًا،
+                                                إِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ، وَاهْدِنِي لِأَحْسَنِ الأَخْلَاقِ، لَا يَهْدِي لِأَحْسَنِهَا إِلَّا أَنْتَ،&nbsp;وَاصْرِفْ عَنِّي سَيِّئَهَا، لَا يَصْرِفُ عَنِّي سَيِّئَهَا إِلَّا أَنْتَ،&nbsp;لَبَّيْكَ
+                                                وَسَعْدَيْكَ،&nbsp;وَالْخَيْرُ كُلُّهُ فِى يَدَيْكَ وَالشَّرُّ لَيْسَ إِلَيْكَ،&nbsp;أَنَا بِكَ وَإِلَيْكَ،&nbsp;تَبَارَكْتَ وَتَعَالَيْتَ،&nbsp;أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_45 d-margins" data-uib="media/text" data-ver="0" name="uib_w_45">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>I turn my face in complete devotion to One Who is the Originator of the heaven and the earth and I am not of the polytheists. Verily my prayer, my sacrifice, my living and my dying are for Allah, the Lord of the worlds; There is no partner with Him and this is what I have been commanded (to profess and believe) and I am of the believers. O Allah, You are the King, there is none worthy of worship except You. You are My Lord, and I am Your slave, I have wronged myself, and I admit to my sin, so forgive me all my sins, verily, there is none who forgives sins but You. And guide me to the best of the manners, none guides to the best of them except You, and turn the evil of them away from me, [verily,] none can turn the evil of them away from me except You. Here I am at Your service, and Grace is to You and the whole of good is in Your hand, and one cannot get nearest to You through evil. My (power as well as existence) is due to You (Thine grace) and I turn to You (for supplication). Blessed are You and Exalted are You. I seek forgiveness from You and turn to You in repentance</em>&nbsp;<em>.</em>
+                                        </p>
+
+                                        <div style="background:#eee; border:1px solid #ccc; padding:5px 10px">Bacaan ini yang turut dikenali sebagai bacaan <em>tawajjuh</em>&nbsp;adalah bacaan terpilih di sisi mazhab as-Syafie dan sebahagian fuqaha mazhab Hanbali. Disunatkan membaca doa ini dalam solat fardhu atau solat
+                                            sunat kecuali solat jenazah.</div>
+                                    </div>
+                                </div><span class="widget uib_w_46 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 6</span>
+                                <div class="tarea widget uib_w_47 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_47">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ لَا شَرِيكَ لَهُ، وَبِذَلِكَ أُمِرْتُ وَأَنَا مِنَ الْمُسْلِمِينَ. اللَّهُمَّ اهْدِنِي لِأَحْسَنِ الْأَعْمَالِ وَأَحْسَنِ الْأَخْلَاقِ
+                                                لَا يَهْدِي لِأَحْسَنِهَا إِلَّا أَنْتَ، وَقِنِي سَيِّئَ الْأَعْمَالِ وَسَيِّئَ الْأَخْلَاقِ لَا يَقِي سَيِّئَهَا إِلَّا أَنْتَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_48 d-margins" data-uib="media/text" data-ver="0" name="uib_w_48">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Indeed, my prayer, my sacrifice, my living, and my dying are for Allah, the Lord of all that exists. He has no partner. And of this I have been commanded, and I am one of the Muslims. O Allah, guide me to the best of deeds and the best of manners, for none can guide to the best of them but You. And protect me from bad deeds and bad manners, for none can protect against them but You</em>&nbsp;<em>.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_49 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 7</span>
+                                <div class="tarea widget uib_w_50 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_50">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ بَاعِدْ بَيْنِى وَبَيْنَ خَطَايَاىَ كَمَا بَاعَدْتَ بَيْنَ الْمَشْرِقِ وَالْمَغْرِبِ ، اللَّهُمَّ نَقِّنِى&nbsp;مِنَ الْخَطَايَا&nbsp;كَمَا يُنَقَّى الثَّوْبُ&nbsp;الأَبْيَضُ مِنَ الدَّنَسِ ، اللَّهُمَّ
+                                                اغْسِلْ&nbsp;خَطَايَاىَ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_51 d-margins" data-uib="media/text" data-ver="0" name="uib_w_51">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah! Set me apart from my sins (faults) as the East and West are set apart from each other and clean me from sins as a white garment is cleaned of dirt (after thorough washing). O Allah! Wash off my sins with water, snow and hail</em><em>.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_52 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 8</span>
+                                <div class="tarea widget uib_w_53 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_53">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللهُمَّ رَبَّ جَبْرَائِيلَ، وَمِيكَائِيلَ، وَإِسْرَافِيلَ، فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، أَنْتَ تَحْكُمُ&nbsp;بَيْنَ عِبَادِكَ فِيمَا كَانُوا فِيهِ يَخْتَلِفُونَ، اهْدِنِي
+                                                لِمَا اخْتُلِفَ فِيهِ مِنَ الْحَقِّ بِإِذْنِكَ، إِنَّكَ تَهْدِي مَنْ تَشَاءُ إِلَى صِرَاطٍ مُسْتَقِيمٍ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_54 d-margins" data-uib="media/text" data-ver="0" name="uib_w_54">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, Lord of Jibra’il, Mika’il, and Israfil; Originator of the heavens and the earth, [and] Knower of the hidden and the seen; You judge between Your slaves concerning that which they used to differ, guide me through that which there has been difference concerning the truth, verily, You are upon a straight path&nbsp;</em><em>.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_55 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 9</span>
+                                <div class="tarea widget uib_w_56 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_56">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللهُمَّ لَكَ الْحَمْدُ ، أَنْتَ نُورُ السَّمَاوَاتِ وَالْأَرْضِ، وَلَكَ الْحَمْدُ، أَنْتَ قَيَّامُ السَّمَاوَاتِ وَالْأَرْضِ، وَلَكَ&nbsp;الْحَمْدُ، أَنْتَ رَبُّ السَّمَاوَاتِ وَالْأَرْضِ وَمَنْ فِيهِنَّ، أَنْتَ
+                                                الْحَقُّ، وَوَعْدُكَ الْحَقُّ، وَقَوْلُكَ الْحَقُّ، وَلِقَاؤُكَ حَقٌّ، وَالْجَنَّةُ حَقٌّ، وَالنَّارُ حَقٌّ، وَالسَّاعَةُ حَقٌّ، اللهُمَّ لَكَ أَسْلَمْتُ، وَبِكَ&nbsp;آمَنْتُ، وَعَلَيْكَ تَوَكَّلْتُ، وَإِلَيْكَ
+                                                أَنَبْتُ، وَبِكَ خَاصَمْتُ، وَإِلَيْكَ حَاكَمْتُ، فَاغْفِرْ لِي مَا قَدَّمْتُ وَأَخَّرْتُ، وَأَسْرَرْتُ وَأَعْلَنْتُ، أَنْتَ إِلَهِي لَا إِلَهَ إِلَّا أَنْتَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_57 d-margins" data-uib="media/text" data-ver="0" name="uib_w_57">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah! All the Praises are for You; You are the Light of the Heavens and the Earth. And all the Praises are for You; You are the Keeper of the Heavens and the Earth. All the Praises are for You; You are the Lord of the Heavens and the Earth and whatever is therein. You are the Truth, and Your Promise is the Truth, and Your Speech is the Truth, and meeting You is the Truth, and Paradise is the Truth and Hell (Fire) is the Truth and the Hour is the Truth. O Allah! I surrender to You, and believe in You, and depend upon You, and repent to You, and in Your cause I fight and with Your orders I rule. So please forgive my past and future sins and those sins which I did in secret or in public. It is You Whom I worship, None has the right to be worshipped except You</em>&nbsp;<em>.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_58 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 10</span>
+                                <div class="tarea widget uib_w_59 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_59">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>الْحَمْدُ لِلَّهِ حَمْدًا كَثِيرًا طَيِّبًا مُبَارَكًا فِيهِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_60 d-margins" data-uib="media/text" data-ver="0" name="uib_w_60">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Praise be to Allah, much praised and blessed</em>&nbsp;<em>.</em>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="upage hidden" id="ruku">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_79" data-uib="layout/header" data-ver="0">
+                    <h2>RUKU '</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button class="btn widget uib_w_80 d-margins white btn-link" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-chevron-left" data-position="icon only"></i>
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_75_14">
+                    <div class="grid grid-pad urow uib_row_5 row-height-5" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_4 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col"><span class="widget uib_w_81 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 1</span>
+                                <div class="tarea widget uib_w_82 d-margins doa-style arabic-style" data-uib="media/text" data-ver="0" name="uib_w_82">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبْحَانَ رَبِّىَ الْعَظِيمِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_83 d-margins" data-uib="media/text" data-ver="0" name="uib_w_83">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Glory be to my Lord Almighty</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_87 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_87">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>or</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_85 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_85">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبْحَانَ رَبِّيَ الْعَظِيمِ وَبِحَمْدِهِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_86 d-margins" data-uib="media/text" data-ver="0" name="uib_w_86">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Glory and praise be to my Mighty Lord</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_88 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 2</span>
+                                <div class="tarea widget uib_w_89 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_89">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبْحَانَكَ وَبِحَمْدِكَ لاَ إِلَهَ إِلاَّ أَنْتَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_90 d-margins" data-uib="media/text" data-ver="0" name="uib_w_90">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>You are free from imperfection and I begin praising You. There is no true god except You.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_91 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer  3</span>
+                                <div class="tarea widget uib_w_92 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_92">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبُّوحٌ قُدُّوسٌ رَبُّ الْمَلاَئِكَةِ وَالرُّوحِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_93 d-margins" data-uib="media/text" data-ver="0" name="uib_w_93">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>All-Glorious, All-Holy, Lord of the angels and spirit.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_94 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer  4</span>
+                                <div class="tarea widget uib_w_95 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_95">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبْحَانَ ذِي الْجَبَرُوتِ وَالْمَلَكُوتِ وَالْكِبْرِيَاءِ وَالْعَظَمَةِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_96 d-margins" data-uib="media/text" data-ver="0" name="uib_w_96">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Glory be to the One Who has all power, sovereignty, magnificence and might.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_97 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer  5</span>
+                                <div class="tarea widget uib_w_98 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_98">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبْحَانَكَ اللَّهُمَّ رَبَّنَا وَبِحَمْدِكَ ، اللَّهُمَّ اغْفِرْ لِى</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_99 d-margins" data-uib="media/text" data-ver="0" name="uib_w_99">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah! You are free from imperfection and I begin with praising You. Forgive my sins</em><em>.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_100 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer  6</span>
+                                <div class="tarea widget uib_w_101 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_101">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ لَكَ رَكَعْتُ وَبِكَ آمَنْتُ وَلَكَ أَسْلَمْتُ خَشَعَ لَكَ سَمْعِى وَبَصَرِى وَمُخِّى وَعَظْمِى&nbsp;وَعَصَبِى</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_102 d-margins" data-uib="media/text" data-ver="0" name="uib_w_102">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+
+                                        <p><em>O Allah, it is for You that I bowed. I affirm my faith in You and I submit to You, and submit humbly before You my hearing, my eyesight, my brain, my bone, my sinew.</em>
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_103 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_103">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>or</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_104 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_104">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ لَكَ رَكَعْتُ، وَبِكَ آمَنْتُ، وَلَكَ أَسْلَمْتُ، وَأَنْتَ رَبِّي، خَشَعَ سَمْعِي وَبَصَرِي وَمُخِّي وَعَظْمِي لِلَّهِ رَبِّ العَالَمِينَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_105 d-margins" data-uib="media/text" data-ver="0" name="uib_w_105">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, to You I have bowed, and in You I believe, and to You have I submitted. My hearing, my sight, my brain, and my bones are humbled to you, the Lord of the worlds</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_106 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_106">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>or</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_107 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_107">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ لَكَ رَكَعْتُ، وَبِكَ آمَنْتُ، وَلَكَ أَسْلَمْتُ، وَعَلَيْكَ تَوَكَّلْتُ، أَنْتَ رَبِّي، خَشَعَ سَمْعِي وَبَصَرِي، وَدَمِي وَلَحْمِي، وَعَظْمِي وَعَصَبِي لِلَّهِ رَبِّ الْعَالِمِينَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_108 d-margins" data-uib="media/text" data-ver="0" name="uib_w_108">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, to You I have bowed, in You I believe, to You I have submitted and in You I put my trust. You are my Lord. My hearing, my sight, my blood, my flesh, my bones and my sinews are humbled before Allah, the Lord of the World.</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden" id="Istiadzah">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_61" data-uib="layout/header" data-ver="0">
+                    <h2>ISTI’ADZAH / TA’AWWUDZ</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button class="btn widget uib_w_78 d-margins white btn-link" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-chevron-left" data-position="icon only"></i>
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_76_66">
+                    <div class="grid grid-pad urow uib_row_4 row-height-4" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_3 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col"><span class="widget uib_w_62 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 1</span>
+                                <div class="tarea widget uib_w_63 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_63">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>أَعُوذُ بِاللَّهِ السَّمِيعِ العَلِيمِ مِنَ الشَّيْطَانِ الرَّجِيمِ، مِنْ هَمْزِهِ وَنَفْخِهِ وَنَفْثِهِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_64 d-margins" data-uib="media/text" data-ver="0" name="uib_w_64">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>I seek refuge in Allah</em><em>, All-Hearing, All-Knowing,</em><em>&nbsp;from the accursed Satan, from his madness, his poetry, and his pride</em><em>.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_65 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 2</span>
+                                <div class="tarea widget uib_w_66 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_66">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الشَّيْطَانِ الرَّجِيمِ، مِنْ هَمْزِهِ، وَنَفْخِهِ، وَنَفْثِهِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_67 d-margins" data-uib="media/text" data-ver="0" name="uib_w_67">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, I seek refuge in You from the accursed Satan, from his madness, his poetry, and his pride</em><em>.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_68 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 3</span>
+                                <div class="tarea widget uib_w_69 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_69">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ مِنْ نَفْخِهِ وَنَفْثِهِ وَهَمْزِهِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_70 d-margins" data-uib="media/text" data-ver="0" name="uib_w_70">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>I seek refuge in Allah from the accursed Satan, from his poetry, his pride, and his madness</em><em>.</em>
+                                        </p>
+
+                                        <div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">Selain daripada bacaan-bacaan <em>ta’awwudz</em>&nbsp;yang warid dalam hadis seperti di atas, <em>ta’awwudz</em>&nbsp;boleh juga dibaca dengan lafaz seperti berikut:</div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_71 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_71">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_72 d-margins" data-uib="media/text" data-ver="0" name="uib_w_72">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>I seek refuge in Allah from the accursed Satan.</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_73 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_73">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>or</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_74 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_74">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>أَعُوذُ بِاللَّهِ السَّمِيعِ العَلِيمِ مِنَ الشَّيْطَانِ الرَّجِيمِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_75 d-margins" data-uib="media/text" data-ver="0" name="uib_w_75">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>I seek refuge in Allah</em><em>, All-Hearing, All-Knowing,</em><em>&nbsp;from the accursed Satan.</em>
+                                        </p>
+
+                                        <div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">Untuk bacaan ini, terdapat riwayat daripada Imam Ahmad yang menambah dengan tambahan kalimat berikut:</div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_76 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_76">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>إِنَّ اللَّهَ هُوَ السَّمِيعُ الْعَلِيمُ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_77 d-margins" data-uib="media/text" data-ver="0" name="uib_w_77">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Indeed, Allah is All-Hearing, All-Knowing.</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden" id="Itidal">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_109" data-uib="layout/header" data-ver="0">
+                    <h2>I'TIDAL</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button class="btn widget uib_w_110 d-margins btn-link white" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-chevron-left" data-position="icon only"></i>
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_59_89">
+                    <div class="grid grid-pad urow uib_row_6 row-height-6" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_5 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col"><span class="widget uib_w_111 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 1</span>
+                                <div class="tarea widget uib_w_112 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_112">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ رَبَّنَا لَكَ الْحَمْدُ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_113 d-margins" data-uib="media/text" data-ver="0" name="uib_w_113">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, our Lord, to You be the praise.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_116 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 2</span>
+                                <div class="tarea widget uib_w_114 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_114">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ رَبَّنَا وَلَكَ الْحَمْدُ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_115 d-margins" data-uib="media/text" data-ver="0" name="uib_w_115">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, our Lord and to You be the praise.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_117 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 3</span>
+                                <div class="tarea widget uib_w_118 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_118">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>رَبَّنَا لَكَ الْحَمْدُ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_119 d-margins" data-uib="media/text" data-ver="0" name="uib_w_119">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Our Lord, to You be the praise.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_120 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 4</span>
+                                <div class="tarea widget uib_w_121 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_121">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>رَبَّنَا وَلَكَ الْحَمْدُ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_122 d-margins" data-uib="media/text" data-ver="0" name="uib_w_122">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Our Lord, all the praises are for You.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_123 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 5</span>
+                                <div class="tarea widget uib_w_124 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_124">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>لِرَبِّيَ الْحَمْدُ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_125 d-margins" data-uib="media/text" data-ver="0" name="uib_w_125">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>To my Lord be praise.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div>
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden" id="Sujud">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_126" data-uib="layout/header" data-ver="0">
+                    <h2>PROSTRATION (SUJOOD)</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button class="btn widget uib_w_127 d-margins btn-link white" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-chevron-left" data-position="icon only"></i>
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_40_78">
+                    <div class="grid grid-pad urow uib_row_7 row-height-7" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_6 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col"><span class="widget uib_w_128 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 1</span>
+                                <div class="tarea widget uib_w_129 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_129">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبْحَانَ رَبِّىَ الأَعْلَى</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_130 d-margins" data-uib="media/text" data-ver="0" name="uib_w_130">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Glory be to my Most High Lord.</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_133 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_133">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>or</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_134 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_134">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبْحَانَ رَبِّيَ الْأَعْلَى وَبِحَمْدِهِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_135 d-margins" data-uib="media/text" data-ver="0" name="uib_w_135">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Glory and praise be to my Most High Lord.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_131 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 2</span>
+                                <div class="tarea widget uib_w_132 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_132">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبْحَانَكَ وَبِحَمْدِكَ لاَ إِلَهَ إِلاَّ أَنْتَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_136 d-margins" data-uib="media/text" data-ver="0" name="uib_w_136">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>You are free from imperfection and I begin praising You. There is no true god except You.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_137 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 3</span>
+                                <div class="tarea widget uib_w_138 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_138">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبُّوحٌ قُدُّوسٌ رَبُّ الْمَلاَئِكَةِ وَالرُّوحِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_139 d-margins" data-uib="media/text" data-ver="0" name="uib_w_139">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>All-Glorious, All-Holy, Lord of the angels and spirit.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_140 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 4</span>
+                                <div class="tarea widget uib_w_141 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_141">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبْحَانَ ذِي الْجَبَرُوتِ وَالْمَلَكُوتِ وَالْكِبْرِيَاءِ وَالْعَظَمَةِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_142 d-margins" data-uib="media/text" data-ver="0" name="uib_w_142">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Glory be to the One Who has all power, sovereignty, magnificence and might.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_143 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 5</span>
+                                <div class="tarea widget uib_w_144 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_144">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>سُبْحَانَكَ اللَّهُمَّ رَبَّنَا وَبِحَمْدِكَ ، اللَّهُمَّ اغْفِرْ لِى</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_145 d-margins" data-uib="media/text" data-ver="0" name="uib_w_145">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah! You are free from imperfection and I begin with praising You. Forgive my sins.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_146 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 6</span>
+                                <div class="tarea widget uib_w_147 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_147">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ اغْفِرْ لِى ذَنْبِى كُلَّهُ دِقَّهُ وَجِلَّهُ وَأَوَّلَهُ وَآخِرَهُ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_148 d-margins" data-uib="media/text" data-ver="0" name="uib_w_148">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah! Forgive all my sins, the small and the great, first and the last</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_149 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_149">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>or</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_150 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_150">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ اغْفِرْ لِى ذَنْبِى كُلَّهُ دِقَّهُ وَجِلَّهُ وَأَوَّلَهُ وَآخِرَهُ وَعَلاَنِيَتَهُ وَسِرَّهُ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_151 d-margins" data-uib="media/text" data-ver="0" name="uib_w_151">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah! Forgive all my sins, the small and the great, first and the last, the open and the secret.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_152 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 7</span>
+                                <div class="tarea widget uib_w_153 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_153">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللهُمَّ أَعُوذُ بِرِضَاكَ مِنْ سَخَطِكَ، وَبِمُعَافَاتِكَ مِنْ عُقُوبَتِكَ، وَأَعُوذُ بِكَ مِنْكَ لَا أُحْصِي ثَنَاءً عَلَيْكَ أَنْتَ كَمَا أَثْنَيْتَ عَلَى نَفْسِكَ&nbsp;</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_154 d-margins" data-uib="media/text" data-ver="0" name="uib_w_154">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah! I seek protection against Your Wrath in Your Pleasure. I seek protection in Your Pardon against Your chastisement, I am not capable of enumerating praise of You. You are as You have lauded Yourself.</em>
+                                        </p>
+
+                                        <p>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_155 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 8</span>
+                                <div class="tarea widget uib_w_156 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_156">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللهُمَّ لَكَ سَجَدْتُ، وَبِكَ آمَنْتُ، وَلَكَ أَسْلَمْتُ، سَجَدَ وَجْهِي لِلَّذِي خَلَقَهُ، وَصَوَّرَهُ، وَشَقَّ سَمْعَهُ وَبَصَرَهُ، تَبَارَكَ اللهُ أَحْسَنُ الْخَالِقِينَ&nbsp;</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_157 d-margins" data-uib="media/text" data-ver="0" name="uib_w_157">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, it is to You that I prostrate myself and it is in You that I affirm my faith, and I submit to You. My face is submitted before One Who created it, and shaped it, and opened his faculties of hearing and seeing. Blessed is Allah, the best of Creators</em>
+                                        </p>
+
+                                        <div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">Lafaz lain yang mempunyai makna yang hampir sama seperti bacaan di atas:</div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_158 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_158">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>(I)</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_159 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_159">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ لَكَ سَجَدْتُ، وَبِكَ آمَنْتُ، وَلَكَ أَسْلَمْتُ، وَأَنْتَ رَبِّي، سَجَدَ وَجْهِي لِلَّذِي خَلَقَهُ وَصَوَّرَهُ&nbsp;وَشَقَّ سَمْعَهُ وَبَصَرَهُ، تَبَارَكَ اللَّهُ أَحْسَنُ الْخَالِقِينَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_160 d-margins" data-uib="media/text" data-ver="0" name="uib_w_160">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, it is to You that I prostrate myself and it is in You that I affirm my faith, and I submit to You, and You are my Lord. My face is submitted before One Who created it, and shaped it, and opened his faculties of hearing and seeing. Blessed is Allah, the best of Creators</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="widget uib_w_253 scale-image d-margins" data-uib="media/img" data-ver="0">
+                                    <figure class="figure-align">
+                                        <img src="images/line.png">
+                                        <figcaption data-position="bottom"></figcaption>
+                                    </figure>
+                                </div>
+                                <div class="tarea widget uib_w_161 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_161">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>(II)</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_162 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_162">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ لَكَ سَجَدْتُ، وَلَكَ أَسْلَمْتُ، وَبِكَ آمَنْتُ، سَجَدَ وَجْهِي لِلَّذِي خَلَقَهُ وَصَوَّرَهُ فَأَحْسَنَ صُورَتَهُ&nbsp;وَشَقَّ سَمْعَهُ وَبَصَرَهُ، تَبَارَكَ اللَّهُ أَحْسَنُ الْخَالِقِينَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_163 d-margins" data-uib="media/text" data-ver="0" name="uib_w_163">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, to You I have prostrated and to You I have submitted, and in You I have believed. My face has prostrated to the One Who created it and shaped it and shaped it well, and brought forth its hearing and sight. Blessed be Allah the best of Creators</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="widget uib_w_252 scale-image d-margins" data-uib="media/img" data-ver="0">
+                                    <figure class="figure-align">
+                                        <img src="images/line.png">
+                                        <figcaption data-position="bottom"></figcaption>
+                                    </figure>
+                                </div>
+                                <div class="tarea widget uib_w_164 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_164">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>(III)</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_165 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_165">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ لَكَ سَجَدْتُ، وَبِكَ آمَنْتُ، وَلَكَ أَسْلَمْتُ، أَنْتَ رَبِّي، سَجَدَ وَجْهِي لِلَّذِي شَقَّ سَمْعَهُ وَبَصَرَهُ، تَبَارَكَ اللَّهُ أَحْسَنُ الْخَالِقِينَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_166 d-margins" data-uib="media/text" data-ver="0" name="uib_w_166">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, it is to You that I prostrate myself and it is in You that I affirm my faith, and I submit to You. You are my Lord. My face is submitted before One Who opened his faculties of hearing and seeing. Blessed is Allah, the best of Creators</em>&nbsp;<em>.</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="widget uib_w_254 scale-image d-margins" data-uib="media/img" data-ver="0">
+                                    <figure class="figure-align">
+                                        <img src="images/line.png">
+                                        <figcaption data-position="bottom"></figcaption>
+                                    </figure>
+                                </div>
+                                <div class="tarea widget uib_w_167 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_167">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>(IV)</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_168 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_168">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ لَكَ سَجَدْتُ، وَبِكَ آمَنْتُ، وَلَكَ أَسْلَمْتُ، وَأَنْتَ رَبِّي، سَجَدَ وَجْهِي لِلَّذِي خَلَقَهُ وَشَقَّ سَمْعَهُ وَبَصَرَهُ، تَبَارَكَ اللَّهُ أَحْسَنُ الخَالِقِينَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_169 d-margins" data-uib="media/text" data-ver="0" name="uib_w_169">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, it is to You that I prostrate myself and it is in You that I affirm my faith, and I submit to You, and You are my Lord. My face is submitted before One Who created it, and opened his faculties of hearing and seeing. Blessed is Allah, the best of Creators</em><em>.</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="widget uib_w_255 scale-image d-margins" data-uib="media/img" data-ver="0">
+                                    <figure class="figure-align">
+                                        <img src="images/line.png">
+                                        <figcaption data-position="bottom"></figcaption>
+                                    </figure>
+                                </div>
+                                <div class="tarea widget uib_w_170 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_170">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>(V)</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_171 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_171">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ لَكَ سَجَدْتُ، وَبِكَ آمَنْتُ، وَلَكَ أَسْلَمْتُ، اللَّهُمَّ أَنْتَ رَبِّي، سَجَدَ وَجْهِي لِلَّذِي خَلَقَهُ وَصَوَّرَهُ وَشَقَّ سَمْعَهُ وَبَصَرَهُ، تَبَارَكَ اللَّهُ أَحْسَنُ الْخَالِقِينَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_172 d-margins" data-uib="media/text" data-ver="0" name="uib_w_172">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, it is to You that I prostrate myself and it is in You that I affirm my faith, and I submit to You. O Allah, You are my Lord. My face is submitted before One Who created it, and shaped it, and opened his faculties of hearing and seeing. Blessed is Allah, the best of Creators</em>&nbsp;<em>.</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden" id="Sitting">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_173 title-size" data-uib="layout/header" data-ver="0">
+                    <h2>SITTING BETWEEN 2 PROSTRATION</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button class="btn widget uib_w_174 d-margins btn-link white" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-chevron-left" data-position="icon only"></i>
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+
+                <div class="upage-content ac0 content-area vertical-col left" id="page_97_58">
+                    <div class="grid grid-pad urow uib_row_8 row-height-8" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_7 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col"><span class="widget uib_w_175 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 1</span>
+                                <div class="tarea widget uib_w_176 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_176">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ اغْفِرْ لِى وَارْحَمْنِى وَاجْبُرْنِى وَاهْدِنِى وَارْزُقْنِى</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_177 d-margins" data-uib="media/text" data-ver="0" name="uib_w_177">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah! Pardon me, have mercy on me, help me, guide me, and grant me sustenance</em>&nbsp;.</p>
+                                    </div>
+                                </div><span class="widget uib_w_178 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 2</span>
+                                <div class="tarea widget uib_w_179 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_179">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ اغْفِرْ لِى وَارْحَمْنِى وَعَافِنِى وَاهْدِنِى وَارْزُقْنِى</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_180 d-margins" data-uib="media/text" data-ver="0" name="uib_w_180">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, grant me pardon, have mercy upon me, grant me a good health, direct me to the path of righteousness and provide me sustenance</em>&nbsp;<em>. </em>
+                                        </p>
+                                    </div>
+                                </div><span class="widget uib_w_181 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 3</span>
+                                <div class="tarea widget uib_w_182 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_182">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>رَبِّ اغْفِرْ لِى وَارْحَمْنِى وَاجْبُرْنِى وَارْزُقْنِى وَارْفَعْنِى</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_183 d-margins" data-uib="media/text" data-ver="0" name="uib_w_183">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>&nbsp;Lord, forgive me, have mercy on me, improve my situation, grant me provision and raise me in status</em>&nbsp;.</p>
+                                    </div>
+                                </div><span class="widget uib_w_184 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 4</span>
+                                <div class="tarea widget uib_w_185 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_185">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>رَبِّ اغْفِرْ لِي، رَبِّ اغْفِرْ لِي</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_186 d-margins" data-uib="media/text" data-ver="0" name="uib_w_186">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Lord, forgive me, O Lord, forgive me</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_187 d-margins" data-uib="media/text" data-ver="0" name="uib_w_187">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">Sebahagian fuqaha as-Syafie berpendapat boleh dirangkumkan doa-doa ini dan bacaannya adalah seperti berikut:</div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_188 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_188">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>رَبِّ اغْفِرْ لِى وَارْحَمْنِى وَاجْبُرْنِى وَارْفَعْنِى&nbsp;وَارْزُقْنِى وَاهْدِنِى&nbsp;وَعَافِنِي وَاعْفُ عَنِّي</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_189 d-margins" data-uib="media/text" data-ver="0" name="uib_w_189">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Tuhanku ampunilah dosaku, rahmatilah daku, cukupkanlah kekuranganku, angkatlah darjatku, rezekikan daku, kurniakanlah daku petunjuk, anugerahkanlah kesejahteraan kepadaku, dan maafkanlah daku</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden" id="Tasyahud">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_190" data-uib="layout/header" data-ver="0">
+                    <h2>TASYAHUD</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button class="btn widget uib_w_191 d-margins btn-link white" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-chevron-left" data-position="icon only"></i>
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_90_59">
+                    <div class="grid grid-pad urow uib_row_9 row-height-9" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_8 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col"><span class="widget uib_w_192 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 1</span>
+                                <div class="tarea widget uib_w_193 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_193">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ، السَّلاَمُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلاَمُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ، أَشْهَدُ أَنْ لاَ إِلَهَ
+                                                إِلَّا اللَّهُ&nbsp;وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_194 d-margins" data-uib="media/text" data-ver="0" name="uib_w_194">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Allah compliments, prayers and pure words are due to Allah. Peace be upon you, O Prophet, and the mercy of Allah (SWT) and his blessings. Peace be upon us and upon the righteous slaves of Allah (SWT). I bear witness that none has the right to be worshipped except Allah and I bear witness that Muhammad is His slave and Messenger</em>&nbsp;<em>.</em>
+                                        </p>
+                                    </div>
+                                </div><span class="widget uib_w_195 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 2</span>
+                                <div class="tarea widget uib_w_196 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_196">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>التَّحِيَّاتُ الْمُبَارَكَاتُ، الصَّلَوَاتُ الطَّيِّبَاتُ لِلَّهِ،&nbsp;السَّلَامُ عَلَيْكَ&nbsp;أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ،&nbsp;السَّلَامُ عَلَيْنَا&nbsp;وَعَلَى عِبَادِ اللهِ الصَّالِحِينَ،
+                                                أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللهِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_197 d-margins" data-uib="media/text" data-ver="0" name="uib_w_197">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>The blessed adoration of the tongue, acts of worship (and) all good things are due to Allah. Peace be upon you, O Prophet, and Allah’s mercy and His blessings. Peace be upon us and upon Allah’s upright servants. I testify that there is no god but Allah, and I testify that Muhammad is Allah’s apostle</em>&nbsp;<em>.</em>
+                                        </p>
+                                    </div>
+                                </div><span class="widget uib_w_198 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 3</span>
+                                <div class="tarea widget uib_w_199 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_199">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>التَّحِيَّاتُ للهِ، الزَّاكِيَاتُ للهِ، الطَّيِّبَاتُ الصَّلَوَاتُ للهِ؛ السَّلاَمُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللهِ. السَّلاَمُ عَلَيْنَا وَعَلَى عِبَادِ اللهِ الصَّالِحِينَ. أَشْهَدُ أَنْ لاَ
+                                                إِلَهَ إِلاَّ اللهُ. وَأَشْهَدُ أَنَّ مُحَمَّداً عَبْدُ اللهِ وَرَسُولُهُ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_200 d-margins" data-uib="media/text" data-ver="0" name="uib_w_200">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Greetings belong to Allah. Pure actions belong to Allah. Good words and prayers belong to Allah. Peace on you, Prophet, and the mercy of Allah and His blessings. Peace be upon us and on the slaves of Allah who are salihun. I testify that there is no god except Allah. And I testify that Muhammad is His slave and His messenger</em>&nbsp;<em>.</em>
+                                        </p>
+                                    </div>
+                                </div><span class="widget uib_w_201 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 4</span>
+                                <div class="tarea widget uib_w_202 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_202">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>بِاسْمِ اللَّهِ وَبِاللَّهِ، التَّحِيَّاتُ لِلَّهِ، وَالصَّلواتُ وَالطَّيِّبَاتُ ، السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ،
+                                                أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ، أَسْأَلُ اللَّهَ الْجَنَّةَ، وَأَعُوذُ بِاللَّهِ مِنَ النَّارِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_203 d-margins" data-uib="media/text" data-ver="0" name="uib_w_203">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>In the name of Allah and by the grace of Allah. All compliments are due to Allah and all prayers and good words are due to Allah. Peace be upon you, O Prophet, and the mercy of Allah and His blessings; peace be upon us and upon the righteous slaves of Allah. I bear witness that none has the right to be worshipped but Allah and I bear witness that Muhammad is His slave and Messenger. I ask Allah for Paradise and I seek refuge with Allah from the Fire</em>&nbsp;<em>.</em>&nbsp;</p>
+                                    </div>
+                                </div><span class="widget uib_w_204 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 5</span>
+                                <div class="tarea widget uib_w_205 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_205">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>التَّحِيَّاتُ&nbsp;الطَّيِّبَاتُ&nbsp;الصَّلَوَاتُ لِلَّهِ&nbsp;، السَّلَامُ عَلَيْكَ&nbsp;أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ، السَّلَامُ عَلَيْنَا&nbsp;وَعَلَى عِبَادِ اللَّهِ الصَّالِحِينَ،
+                                                أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_208 d-margins" data-uib="media/text" data-ver="0" name="uib_w_208">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>Allah compliments, pure words and prayers are due to Allah. Peace be upon you, O Prophet, and the mercy of Allah (SWT) and his blessings. Peace be upon us and upon the righteous slaves of Allah (SWT). I bear witness that none has the right to be worshipped except Allah and I bear witness that Muhammad is His slave and Messenger.</em>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden" id="Selawat">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_209" data-uib="layout/header" data-ver="0">
+                    <h2>SELAWAT AFTER TASYAHUD</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button class="btn widget uib_w_210 d-margins white btn-link" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-chevron-left" data-position="icon only"></i>
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_65_42">
+                    <div class="grid grid-pad urow uib_row_10 row-height-10" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_9 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col"><span class="widget uib_w_211 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 1</span>
+                                <div class="tarea widget uib_w_212 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_212">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ، وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا
+                                                بَارَكْتَ عَلَى إِبْرَاهِيمَ، وَعَلَى آلِ إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_215 d-margins" data-uib="media/text" data-ver="0" name="uib_w_215">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, bless Muhammad and Muhammad’s family as You did bless Abraham. You are indeed praiseworthy and glorious. O Allah grant favours of Muhammad and Muhammad’s family as You did grant favour to Abraham and Abraham’s family. You are indeed praiseworthy and glorious.</em>
+                                        </p>
+
+                                        <div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">Lafaz lain yang mempunyai makna yang hampir sama:</div>
+                                    </div>
+                                </div>
+
+                                <div class="tarea widget uib_w_214 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_214">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>(I)</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_216 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_216">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ، وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ، وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى آلِ
+                                                إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_217 d-margins" data-uib="media/text" data-ver="0" name="uib_w_217">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, bless Muhammad and Muhammad’s family as You did bless Abraham’s family. You are indeed praiseworthy and glorious. O Allah grant favours of Muhammad and Muhammad’s family as You did grant favour to Abraham’s family. You are indeed praiseworthy and glorious</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="widget uib_w_227 scale-image d-margins" data-uib="media/img" data-ver="0">
+                                    <figure class="figure-align">
+                                        <img src="images/line.png">
+                                        <figcaption data-position="bottom"></figcaption>
+                                    </figure>
+                                </div>
+                                <div class="tarea widget uib_w_218 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_218">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>(II)</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_219 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_219">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ، وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ، وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ،
+                                                إِنَّكَ حَمِيدٌ مَجِيدٌ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_220 d-margins" data-uib="media/text" data-ver="0" name="uib_w_220">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, bless Muhammad and Muhammad’s family as You did bless Abraham. You are indeed praiseworthy and glorious. O Allah grant favours of Muhammad and Muhammad’s family as You did grant favour to Abraham. You are indeed praiseworthy and glorious</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="widget uib_w_228 scale-image d-margins" data-uib="media/img" data-ver="0">
+                                    <figure class="figure-align">
+                                        <img src="images/line.png">
+                                        <figcaption data-position="bottom"></figcaption>
+                                    </figure>
+                                </div>
+                                <div class="tarea widget uib_w_221 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_221">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>(III)</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_222 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_222">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ إِنَّكَ حَمِيدٌ مَجِيدٌ، وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ إِنَّكَ
+                                                حَمِيدٌ مَجِيدٌ
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_223 d-margins" data-uib="media/text" data-ver="0" name="uib_w_223">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, bless Muhammad and Muhammad’s family as You did bless Abraham. You are indeed praiseworthy and glorious, and grant favours of Muhammad and Muhammad’s family as You did grant favour to Abraham. You are indeed praiseworthy and glorious</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="widget uib_w_229 scale-image d-margins" data-uib="media/img" data-ver="0">
+                                    <figure class="figure-align">
+                                        <img src="images/line.png">
+                                        <figcaption data-position="bottom"></figcaption>
+                                    </figure>
+                                </div>
+                                <div class="tarea widget uib_w_224 d-margins maksud-style" data-uib="media/text" data-ver="0" name="uib_w_224">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p>(IV)</p>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_225 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_225">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَآلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ
+                                                وَآلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_226 d-margins" data-uib="media/text" data-ver="0" name="uib_w_226">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, bless Muhammad and Muhammad’s family as You did bless Abraham and Abraham’s family. You are indeed praiseworthy and glorious, and grant favours of Muhammad and Muhammad’s family as You did grant favour to Abraham and Abraham’s family. You are indeed praiseworthy and glorious</em>
+                                        </p>
+                                    </div>
+                                </div><span class="widget uib_w_230 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 2</span>
+                                <div class="tarea widget uib_w_231 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_231">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، وَبَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى
+                                                آلِ إِبْرَاهِيمَ فِي العَالَمِينَ إِنَّكَ حَمِيدٌ مَجِيدٌ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_232 d-margins" data-uib="media/text" data-ver="0" name="uib_w_232">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, bless Muhammad and Muhammad’s family as You did bless Abraham and Abraham’s family, and grant favours of Muhammad and Muhammad’s family as You did grant favour to Abraham and Abraham’s family. In all the worlds, You are indeed praiseworthy and glorious</em>
+                                        </p>
+
+                                        <div style="background:#eee; border:1px solid #ccc; padding:5px 10px">Lafaz lain yang mempunyai makna yang hampir sama:</div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_233 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_233">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ، وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى آلِ إِبْرَاهِيمَ، وَبَارِكْ عَلَى مُحَمَّدٍ، وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى آلِ إِبْرَاهِيمَ فِي الْعَالَمِينَ إِنَّكَ
+                                                حَمِيدٌ مَجِيدٌ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_234 d-margins" data-uib="media/text" data-ver="0" name="uib_w_234">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, bless Muhammad and Muhammad’s family as You did bless Abraham’s family, and grant favours of Muhammad and Muhammad’s family as You did grant favour to Abraham’s family. In all the worlds, You are indeed praiseworthy and glorious.</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden" id="Salam">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_235" data-uib="layout/header" data-ver="0">
+                    <h2>DUA BEFORE SALAM</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left">
+                        <button class="btn widget uib_w_236 d-margins white btn-link" data-uib="twitter%20bootstrap/button" data-ver="1"><i class="glyphicon glyphicon-chevron-left" data-position="icon only"></i>
+                        </button>
+                    </div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content ac0 content-area vertical-col left" id="page_43_69">
+                    <div class="grid grid-pad urow uib_row_11 row-height-11" data-uib="layout/row" data-ver="0">
+                        <div class="col uib_col_10 col-0_12-12" data-uib="layout/col" data-ver="0">
+                            <div class="widget-container content-area vertical-col"><span class="widget uib_w_237 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 1</span>
+                                <div class="tarea widget uib_w_238 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_238">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ إِنِّى أَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الْمَسِيحِ الدَّجَّالِ ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الْمَحْيَا وَفِتْنَةِ الْمَمَاتِ ، اللَّهُمَّ إِنِّى أَعُوذُ بِكَ مِنَ
+                                                الْمَأْثَمِ وَالْمَغْرَمِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_239 d-margins" data-uib="media/text" data-ver="0" name="uib_w_239">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, I seek refuge in You from the punishment of the grave; I seek refuge in You from the trial of the Antichrist (Dajjal); I seek refuge in You from the trial of life and the trial of death; O Allah, I seek refuge in You from sin and debt</em>
+                                        </p>
+                                    </div>
+                                </div><span class="widget uib_w_240 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 2</span>
+                                <div class="tarea widget uib_w_241 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_241">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ القَبْرِ، وَمِنْ عَذَابِ النَّارِ، وَمِنْ فِتْنَةِ المَحْيَا وَالمَمَاتِ، وَمِنْ فِتْنَةِ المَسِيحِ الدَّجَّالِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_242 d-margins" data-uib="media/text" data-ver="0" name="uib_w_242">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, I seek refuge with you from the torment of the grave, and I seek refuge with You from the torment of the Fire, and I seek refuge with You from the trials of life and death and I seek refuge with You from the trial of the Dajjal.</em>
+                                        </p>
+
+                                        <div style="background:#eee;border:1px solid #ccc;padding:5px 10px;">Bacaan lain yang mempunyai makna yang sama:</div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_249 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_249">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ جَهَنَّمَ، وَمِنْ عَذَابِ الْقَبْرِ، وَمِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ، وَمِنْ شَرِّ فِتْنَةِ الْمَسِيحِ الدَّجَّالِ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_250 d-margins" data-uib="media/text" data-ver="0" name="uib_w_250">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, I seek refuge with you from the torment of the Fire, and from the torment of the Grave, and from the trials of life and death and from the evil of the trial of the Dajjal</em>
+                                        </p>
+                                    </div>
+                                </div><span class="widget uib_w_243 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 3</span>
+                                <div class="tarea widget uib_w_244 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_244">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي ظُلْمًا كَثِيرًا، وَلاَ يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ، فَاغْفِرْ لِي مَغْفِرَةً مِنْ عِنْدِكَ، وَارْحَمْنِي، إِنَّكَ أَنْتَ الغَفُورُ الرَّحِيمُ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_245 d-margins" data-uib="media/text" data-ver="0" name="uib_w_245">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah! I have wronged my soul very much (oppressed myself), and none forgives the sins but You; so please bestow Your Forgiveness upon me. No doubt, You are the Oft-Forgiving, Most Merciful.</em>
+                                        </p>
+                                    </div>
+                                </div><span class="widget uib_w_246 d-margins badge" data-uib="twitter%20bootstrap/badge_and_label" data-ver="1">Prayer 4</span>
+                                <div class="tarea widget uib_w_247 d-margins doa-style" data-uib="media/text" data-ver="0" name="uib_w_247">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <div class="amiriFont">
+                                            <p>اللهُمَّ اغْفِرْ لِي مَا قَدَّمْتُ وَمَا أَخَّرْتُ، وَمَا أَسْرَرْتُ وَمَا أَعْلَنْتُ، وَمَا أَسْرَفْتُ، وَمَا أَنْتَ أَعْلَمُ بِهِ مِنِّي، أَنْتَ المُقَدِّمُ، وَأَنْتَ الْمُؤَخِّرُ، لَا إِلَهَ إِلَّا أَنْتَ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tarea widget uib_w_248 d-margins" data-uib="media/text" data-ver="0" name="uib_w_248">
+                                    <div class="widget-container left-receptacle"></div>
+                                    <div class="widget-container right-receptacle"></div>
+                                    <div class="text-container">
+                                        <p><em>O Allah, forgive me my former and latter sins, what I have kept secret and what I have done openly, and what I have done extravagance; and what You know better than I do. You are the Advancer, the Delayer, there is no god but You</em>
+                                        </p>
+                                    </div>
+                                </div>
+                                <span class="uib_shim"></span>
+                            </div>
+                        </div>
+                        <span class="uib_shim"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+</html>
